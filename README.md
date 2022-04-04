@@ -1,4 +1,4 @@
-# oh2279
+# OH BEOM SEOK 🌱
 
 [![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=oh2279)](https://solved.ac/oh2279/)
 
