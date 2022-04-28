@@ -1,16 +1,20 @@
-#include <iostream>
-#include <stack>
+#include<iostream>
+#include<stack>
 #include<string>
 using namespace std;
 
+int n=0,flag=0;
+string str;
 
 int main() {
-	int cnt = 0;
-	int flag = 0;
-	string str;
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-	cin >> cnt;
-	for (int i = 0; i < cnt; i++) {
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+		flag = 0;
 		stack<char> s;
 		cin >> str;
 		for (int j = 0; j < str.size(); j++) {
@@ -28,12 +32,12 @@ int main() {
 			}
 		}
 		if (!s.empty() || flag == 1) {
-			cout << "NO" << endl;
+			cout << "NO\n";
 		}
 		else {
-			cout << "YES" << endl;
+			cout << "YES\n";
 		}
-		flag = 0;
+		
 	}
 	return 0;
 }
