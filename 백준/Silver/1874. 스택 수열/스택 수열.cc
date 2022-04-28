@@ -5,17 +5,17 @@
 #include<string>
 using namespace std;
 
-
-
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
 	bool flag;
 	int n, last = 0;
+
 	cin >> n;
 	string ans;
 	stack<int> s;
+
 	for (int i = 0; i < n; i++) {
 		int num;
 		cin >> num;
@@ -42,10 +42,9 @@ int main() {
 			}
 		}
 	}
-	
 
-		for (auto x : ans) {
-			cout << x << '\n';
-		}
-	
+	for (auto x : ans) {
+		cout << x << '\n';
+	}
+
 }
