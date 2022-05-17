@@ -1,7 +1,7 @@
 # OH BEOM SEOK 🌱
- <div align="center">
+<div align="center">
+ 
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=oh2279&show_icons=true&theme=tokyonight)
-
 
 [![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=oh2279)](https://solved.ac/oh2279/)
   
