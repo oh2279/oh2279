@@ -16,17 +16,17 @@ int sx,sy;
 
 void bfs_for_three(){
     while(!q.empty()){
-        int y = q.front().first;
-        int x = q.front().second;
+        int x = q.front().first;
+        int y = q.front().second;
         q.pop();
-        if (visited[y][x] == k+1 ) continue;
+        if (visited[x][y] == k+1 ) continue;
         for(int i=0; i<4;i++){
             int nx = x + dx[i];
             int ny = y + dy[i];
-            if (ny < 0 || nx < 0 || ny >= n || nx >= m || visited[ny][nx] || map[ny][nx]==4) continue;
-            visited[ny][nx] = visited[y][x] + 1;
-            map[ny][nx] = 1;
-            q.push({ ny, nx });
+            if (ny < 0 || nx < 0 || ny >= m || nx >= n || visited[nx][ny] || map[nx][ny]==4) continue;
+            visited[nx][ny] = visited[x][y] + 1;
+            map[nx][ny] = 1;
+            q.push({ nx, ny });
         }
     }
 }
@@ -40,20 +40,20 @@ void reset(){
 
 int bfs(){
     queue<pair<int,int>> nq;
-    nq.push({sy, sx});
-    visited[sy][sx]=1;
+    nq.push({sx, sy});
+    visited[sx][sy]=1;
     while(!nq.empty()){
-        int y = nq.front().first;
-        int x = nq.front().second;
+        int x = nq.front().first;
+        int y = nq.front().second;
         nq.pop();
 
         for(int i=0; i<4;i++){
             int nx = x + dx[i];
             int ny = y + dy[i];
-            if (ny < 0 || nx < 0 || ny >= n || nx >= m || visited[ny][nx] || map[ny][nx]==1) continue;
-            visited[ny][nx] = visited[y][x] + 1;
-            if (map[ny][nx] == 2) return visited[y][x];
-            nq.push({ny, nx });
+            if (ny < 0 || nx < 0 || ny >= m || nx >= n || visited[nx][ny] || map[nx][ny]==1) continue;
+            visited[nx][ny] = visited[x][y] + 1;
+            if (map[nx][ny] == 2) return visited[x][y];
+            nq.push({nx, ny });
         }
     }
     return -1;
@@ -70,7 +70,7 @@ int main() {
         for(int j=0; j<m;j++){
             cin >> map[i][j];
             if(map[i][j]==4){
-                sy=i; sx=j;
+                sx=i; sy=j;
             }
         }
     }
