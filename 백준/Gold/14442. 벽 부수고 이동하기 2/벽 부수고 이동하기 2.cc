@@ -1,73 +1,70 @@
 #include <bits/stdc++.h>
- 
+
 using namespace std;
- 
+
+int n,m,k;
+string s;
+int board[1001][1001];
+bool visited[1001][1001][11];
+int dx[4] = {-1, 1, 0, 0};
+int dy[4] = {0, 0, -1, 1};;
+
 struct P{
     int r, c;       // 현재 위치
     int cnt = 1;    // 지금까지 지나온 칸 수
-    int wall = 0;   // 지금까지 부순 벽의 수 
+    int wall = 0;   // 지금까지 부순 벽의 수
 };
- 
-int N, M, K;
-int Map[1001][1001];
-int dr[4] = {-1, 1, 0, 0}, dc[4] = {0, 0, -1, 1};
-int visited[1001][1001][11] = {0, };
- 
-void input(){
-    cin >> N >> M >> K;
-    string in;
-    for(int i = 0; i < N; i++){
-        cin >> in;
-        for(int j = 0; j < M; j++){
-            Map[i][j] = in[j] - '0';
-        }
-    }
-}
- 
-int BFS(){
-    int result = 0;
-    queue<P> que;
-    P temp;
-    temp.r = 0;  temp.c = 0;
-    que.push(temp);
- 
-    visited[0][0][0] = 1;
- 
-    while(!que.empty()){
-        P now = que.front();
-        que.pop();
-        
-        // BFS 이므로 가장 먼저 도착한 경우임
-        if(now.r == N-1 && now.c == M-1) return now.cnt;
-        
-        for(int i = 0; i < 4; i++){
-            int nr = now.r + dr[i];
-            int nc = now.c + dc[i];
-            
-            // 좌표를 넘어가는 경우
-            if(nr < 0 || nr >= N || nc < 0 || nc >= M) continue;
+
+int bfs(){
+    // x,y좌표 + 지나온 칸의 수,벽을 부순 횟수
+    queue<P> q;
+    P tmp;
+    tmp.r = 0; tmp.c=0;
+    q.push(tmp);
+    visited[0][0][0] = true;
+
+    while(!q.empty()){
+        int x = q.front().r;
+        int y = q.front().c;
+        int ans = q.front().cnt;
+        int wall = q.front().wall;
+        q.pop();
+
+        if(x==n-1 && y == m-1) return ans;
+
+        for(int i=0;i<4;i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+
+            if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
             // 이미 방문한 경우
-            if(visited[nr][nc][now.wall]) continue;
-            
-            // 다음이 벽이 아니고, 방문하지 않았다면
-            if(!Map[nr][nc] && !visited[nr][nc][now.wall]){
-                visited[nr][nc][now.wall] = 1;
-                que.push({nr, nc, now.cnt+1, now.wall});
-            }
-            // 다음이 벽이고, 벽을 최소 하나 더 부술 수 있고, 하나 더 부순 경우에 방문하지 않았다면
-            if(Map[nr][nc] && now.wall < K && !visited[nr][nc][now.wall+1]){
-                visited[nr][nc][now.wall+1] = 1;
-                que.push({nr, nc, now.cnt+1, now.wall+1});
+            if (visited[nx][ny][wall]) continue;
+            if (board[nx][ny] == 0) {
+                q.push({nx,ny,ans+1,wall});
+                visited[nx][ny][wall] = true;
+            } else if (board[nx][ny] == 1) { // 벽을 만난 경우
+                if (wall < k) { // 부술 수 있다면
+                    if(visited[nx][ny][wall+1]) continue;
+                    q.push({nx,ny,ans+1,wall+1});
+                    visited[nx][ny][wall+1] = true;
+                }
             }
         }
     }
-    
     return -1;
 }
- 
-int main(){
-    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-    input();
-    cout << BFS();
-    return 0;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+
+    cin >> n >> m >> k;
+    for(int i=0;i<n;i++){
+        cin >> s;
+        for(int j=0; j<m;j++){
+            board[i][j] = s[j]-'0';
+        }
+    }
+    cout << bfs();
 }
