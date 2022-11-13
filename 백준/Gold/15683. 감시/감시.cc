@@ -46,11 +46,7 @@ void bruteForce(int num) {
     }
     for (int dir = 0; dir < 4; dir++) { // 0 == right, 1 == up, 2 == left, 3 == down
         //dir 1 증가하면 90도 회전
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                store[i][j] = arr[i][j]; // 중간 정보 저장
-            }
-        }
+        
         if (arr[x][y] == 1) {
             check(x, y, dir); // right
         } else if (arr[x][y] == 2) {
