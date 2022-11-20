@@ -5,7 +5,7 @@ typedef unsigned long long ull;
 string s;
 int ans = -1;
 
-int max_failure(string str){
+void max_failure(string str){
     int j=0;
     vector<int> fail(str.size());
     // pi 배열은 접두사 접미사가 일치하는 최대 길이 구하기
@@ -21,7 +21,6 @@ int max_failure(string str){
         }
         ans = max(ans,fail[i]);
     }
-    return ans;
 }
 
 int main() {
@@ -36,10 +35,7 @@ int main() {
     cin >> s;
 
     for(int i=0; i<s.size()-1;i++){
-        int maxi = max_failure(s.substr(i));
-        if(maxi >= ans){
-            ans = maxi;
-        }
+        max_failure(s.substr(i));
     }
     cout << ans;
     return 0;
