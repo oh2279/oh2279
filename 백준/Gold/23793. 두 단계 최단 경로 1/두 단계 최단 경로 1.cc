@@ -1,60 +1,63 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
-#define FASTIO cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
-#define FOR(i,a,b) for(int i=(a);i<=(b);i++)
-#define ROF(i,a,b) for(int i=(a);i>=(b);i--)
-#define ll long long int
-#define pii pair<int, int>
-#define PQ priority_queue
-#define LEN(v) int(v.size())
-#define ALL(v) v.begin(),v.end()
+typedef long long ll;
 #define INF 2e9
-#define LINF 1e18
-#define MAX 100001
 
-int N;
-vector<vector<pii>> Edge(MAX, vector<pii>());
-vector<int> Dist(MAX, INF);
+int n, m;
+int b,e,s, a,t,cost;
+int dist[100001];
+vector<pair<int,int>> v[100001];
 
-int DT(int start, int end, int dont) {
-	PQ<pii> pq;
-	fill(ALL(Dist), INF);
-	Dist[start] = 0;
-	pq.push({ 0, start });
-	while (!pq.empty()) {
-		int dist = -pq.top().first;
-		int node = pq.top().second;
-		pq.pop();
-		if (Dist[node] < dist) continue;
-		FOR(i, 0, LEN(Edge[node]) - 1) {
-			int next = Edge[node][i].first;
-			int ndist = Edge[node][i].second;
-			if (next == dont) continue;
-			if (Dist[next] > dist + ndist) {
-				Dist[next] = dist + ndist;
-				pq.push({ -Dist[next], next });
-			}
-		}
-	}
-	return Dist[end];
+int dijk(int start, int end,int dont){
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    //memset(dist, 127, sizeof(dist)); // 127은 비트연산으로 약 21억 숫자
+    // or
+    fill(dist, dist + 100001, INF);
+
+    // 시작 노드 초기화
+    dist[start] = 0;
+
+    // (가중치, 도착노드)
+    pq.push({0, start});
+
+    while (!pq.empty()) {
+        int cost = pq.top().first;
+        int idx = pq.top().second;
+        pq.pop();
+
+        if (dist[idx] < cost) continue;
+
+        for (int i = 0; i < v[idx].size(); i++) {
+            int next = v[idx][i].first;
+            int weight = v[idx][i].second;
+
+            if (dist[next] > dist[idx] + weight) {
+                // if u -> v , dist[v] < dist[u] + w(u,v)이면 초기화할 필요 x
+                if(next==dont) continue;
+                dist[next] = dist[idx] + weight;
+                pq.push({dist[next], next});
+            }
+        }
+    }
+    return dist[end];
 }
 
 int main() {
-	FASTIO;
-	int M, X, Y, Z;
-	cin >> N >> M;
-	FOR(m, 1, M) {
-		int u, v, w;
-		cin >> u >> v >> w;
-		Edge[u].push_back({ v, w });
-	}
-	cin >> X >> Y >> Z;
-	int xy_dist = DT(X, Y, 0);
-	int yz_dist = DT(Y, Z, 0);
-	int noty_dist = DT(X, Z, Y);
-	cout << (xy_dist == INF || yz_dist == INF ? -1 : xy_dist + yz_dist) << " ";
-	cout << (noty_dist == INF ? -1 : noty_dist);
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
 
-	return 0;
+    cin >> n >> m;
+
+    for (int i = 0; i < m; i++) {
+        cin >> b >> e >> cost;
+        v[b].push_back({e, cost});
+    }
+    cin >> s >> a >> t;
+    int firstHalf = dijk(s,a,0);
+    int secondHalf = dijk(a,t,0);
+    int nomiddle = dijk(s,t,a);
+    cout << (firstHalf == INF || secondHalf == INF ? -1 : firstHalf + secondHalf) << " ";
+    cout << (nomiddle == INF ? -1 : nomiddle);
+    return 0;
 }
