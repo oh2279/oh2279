@@ -1,32 +1,20 @@
 import sys
-sys.setrecursionlimit(10**6)
+import heapq    
+#sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
 n = int(input())
 arr=[]
-cnt = -1
-ans = 0
 
 for i in range(n):
-    p, d = map(int,input().split())
-    arr.append([p,d])
-    cnt = max(cnt,d)
+    arr.append(list(map(int,input().split())))
     
-arr = sorted(arr,key=lambda x:-x[0])
-visited = [0 for _ in range(cnt+1)]
+arr = sorted(arr,key=lambda x:x[1])
 
-for p,d in arr:
-    if visited[d]==0:
-        visited[d] = p
-    else:
-        d-=1
-        while d:
-            if visited[d]==0:
-                visited[d] = p
-                break
-            d -= 1
-            
-for w in visited:
-    ans += w
+schedule=[]
+for i in arr:
+  heapq.heappush(schedule, i[0])
+  if (len(schedule)>i[1]):
+    heapq.heappop(schedule)
 
-print(ans)
+print(sum(schedule))
