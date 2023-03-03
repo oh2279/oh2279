@@ -40,3 +40,4 @@ if __name__ == "__main__":
     w = int(input())
     
     print(topology_sort()) 
+      
