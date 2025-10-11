@@ -1,27 +1,25 @@
 from itertools import combinations
+INF  = float("INF")  #key point
+n, k = map(int, input().split())
+arr = []
+result = INF
 
-def mii():
-    return map(int, input().split())
+for _ in range(n):
+    arr.append(list(map(int, input().split())))
 
-N, K = mii()
-INF = float("INF")
-x = [0] * N
-y = [0] * N
-for i in range(N):
-    x[i], y[i] = mii()
-
-def max_dist(comb):
+def calc(combs):
+    new_arr = [x for x in arr if x not in combs]
     rst = 0
-    for i in range(N):
-        min_dist = INF
-        for c in comb:
-            dist = abs(x[i] - x[c]) + abs(y[i] - y[c])
-            min_dist = min(min_dist, dist)
-        rst = max(rst, min_dist)
+    for h in new_arr:
+        dist = INF
+        for c in combs:
+            dist = min(dist, abs(c[0]-h[0]) + abs(c[1]-h[1]))
+        rst = max(rst, dist)
     return rst
 
-ans = INF
-for comb in combinations(range(N), K):
-    ans = min(ans, max_dist(comb))
-
-print(ans)
+for c in combinations(arr, k):
+    result = min(result, calc(c))
+    
+print(result)
+        
+        
