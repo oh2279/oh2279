@@ -14,7 +14,7 @@ def flip(A):
         
     for i in range(N):
         for j in range(i+1):
-            tmp[i][j] = A[i][abs(j-i)]
+            tmp[i][j] = A[i][abs(j-i)]  # == i-j
             
     return tmp
 
@@ -25,8 +25,8 @@ def rotate(A):
     # tmp = A 로 하면 안됨 (shallow copy)
     
     for i in range(N):
-        for j in range(i,N): 
-            tmp[j][i] = A[N-1-i][j-i]
+        for j in range(i+1): 
+            tmp[i][j] = A[N-1-j][i-j]
     return tmp
     
 N = int(input())
