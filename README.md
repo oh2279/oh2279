@@ -53,6 +53,6 @@
   </div>
 
   <a href="https://solved.ac/oh2279/">
-    <img src="http://mazassumnida.wtf/api/v2/generate_badge?boj=oh2279" />
+    <img src="https://mazassumnida.wtf/api/v2/generate_badge?boj=oh2279" />
   </a>
 </div>
