@@ -6,8 +6,8 @@
   <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;">Hello, 안녕하세요</h2>
   <div style="font-weight: 700; font-size: 15px; color: #282d33;">
     <ul>
-      <li>이것저것 여러가지 해보고싶은게 많습니다</li>
-      <li>하루는 짧지만 인생은 길다!</li>
+      <li>B.S. in Software Engineering, Korea Aerospace University (Mar 2018 – Feb 2024)</li>
+      <li>M.S. Student in Artificial Intelligence, Korea Aerospace University (Mar 2024 – Feb 2026) CVLAB — Advisor: Prof. Sunok Kim</li>
     </ul>
   </div>
 </div>
