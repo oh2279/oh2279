@@ -7,7 +7,7 @@
   <div style="font-weight: 700; font-size: 15px; color: #282d33;">
     <ul>
       <li>B.S. in Software Engineering, Korea Aerospace University (Mar 2018 – Feb 2024)</li>
-      <li>M.S. Student in Artificial Intelligence, Korea Aerospace University (Mar 2024 – Feb 2026) CVLAB — Advisor: Prof. Sunok Kim</li>
+      <li>M.S. in Artificial Intelligence, Korea Aerospace University (Mar 2024 – Feb 2026) CVLAB — Advisor: Prof. Sunok Kim</li>
     </ul>
   </div>
 </div>
